@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Arch Linux) (preloaded format=xelatex 2020.4.1)  1 APR 2020 21:43
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Arch Linux) (preloaded format=xelatex 2020.4.8)  13 APR 2020 23:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -584,20 +584,28 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 
 [1
 
-] (./main.toc)
+] (./main.toc
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
+ (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
- [1] (./chapters/chap1.tex) (./chapters/chap2.tex) (./chapters/chap3.tex) (./chapters/chap4.tex) [2
+ [1] (./chapters/chap1.tex [2
 
-] (./main.aux) ) 
+] [3] [4]) (./chapters/chap2.tex) (./chapters/chap3.tex) (./chapters/chap4.tex) [5] [6] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 17455 strings out of 492483
- 388390 string characters out of 6134980
- 464334 words of memory out of 5000000
- 21823 multiletter control sequences out of 15000+600000
- 532564 words of font info for 40 fonts, out of 8000000 for 9000
+ 17551 strings out of 492483
+ 392916 string characters out of 6134980
+ 478358 words of memory out of 5000000
+ 21898 multiletter control sequences out of 15000+600000
+ 535443 words of font info for 57 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,4n,76p,360b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,21n,76p,429b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (3 pages).
+Output written on main.pdf (7 pages).

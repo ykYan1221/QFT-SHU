@@ -1,2 +1,223 @@
 \section{引言}
 
+\subsection{引言}
+
+构建OFT的一些初衷
+
+\begin{itemize}
+    \item 相对论性量子力学中的负能态问题
+    \item 量子力学二级微扰论的虚粒子的诠释
+    \item 因果律(causality)
+\end{itemize}
+
+\subsubsection{因果律问题的分析}
+
+我们考虑传播子
+
+\begin{equation}
+    K(\vec{x}_2,\vec{x}_1; t_2, t_1):=\bra{\vec{x}_2}\hat{U}(t_2, t_1)\ket{\vec{x}_1}
+\end{equation}
+
+其中$\hat{U}(t_2, t_1)$是时间演化算符。这一项的物理意义是，假设在t1时刻有一个由$\ket{\vec{x}_1}$来刻画的量子态，即位于$\vec{x}_1$处的坐标算符本征态。让这个态经过一段时间演化后，它会变成弥漫于空间的波，在t2时刻有一定几率处于$\vec{x}_2$，$K(\vec{x}_2,\vec{x}_1; t_2, t_1)$所刻画的正是这个概率。在狭义相对论中，我们知道物质的运动和信息的传播都不能超光速，即类空的两点之间不应该有关联，所以类空的两点之间的传播子应该为0。我们计算非相对论性量子力学中的自由粒子的传播子可以得到:(取Planck常数$\hbar=1$)
+
+\begin{equation}
+    \begin{split}
+        K(\vec{x}_2,\vec{x}_1; t, 0) &= \bra{\vec{x}_2}e^{-i\frac{\vec{\hat{p}}^2}{2m}t}\ket{\vec{x}_1} \\
+            &= \int \frac{d^3p}{(2\pi)^3} \bra{\vec{x}_2}e^{-i\frac{\vec{\hat{p}}^2}{2m}t}\ket{\vec{p}}<\vec{p}|\vec{x}_1> \\
+            &= \int \frac{d^3p}{(2\pi)^3} e^{-i\frac{\vec{p}^2}{2m}t} e^{i\vec{p}\dot(\vec{x}_2-\vec{x}_1)} \\
+            &= \biggl(\frac{m}{2\pi it}\biggr)^{3/2} e^{im|\vec{x}_2-\vec{x}_1|/2t}
+    \end{split}
+\end{equation}
+
+当$|\vec{x}_2-\vec{x}_1|$很大而t很小时，这个传播子仍然不为0，说明在类空间隔下的两个点之间存在关联，这与狭义相对论是矛盾的。所以我们应当考虑相对论性量子力学，此时自由粒子的传播子是
+
+\begin{equation}
+    \begin{split}
+        K(\vec{x}_2,\vec{x}_1; t, 0) &= \bra{\vec{x}_2}e^{-it\sqrt{\vec{p}^2+m^2}}\ket{\vec{x}_1} \\
+            &= \int \frac{d^3p}{(2\pi)^3} e^{-it\sqrt{\vec{p}^2+m^2}} e^{i\vec{p}\dot(\vec{x}_2-\vec{x}_1)} \\
+            &= \frac{1}{2\pi^2|\vec{x}_2-\vec{x}_1|} \int p\sin(p|\vec{x}_2-\vec{x}_1|)e^{-it\sqrt{\vec{p}^2+m^2}}dp \\
+            &\sim e^{-m\sqrt{\vec{x}^2-t^2}}
+    \end{split}
+\end{equation}
+
+这个传播子在类空间隔下仍然不为0，说明相对论性量子力学在因果律方面存在一些问题，这将在QFT中得到回答。
+
+
+
+\subsubsection{构建理论的一般步骤}
+
+\begin{itemize}
+    \item[1] 写下拉氏量，比如$\mathcal{L}[\phi]=\partial^\mu\phi\partial_\mu\phi-\frac{1}{2}m^2\phi^2+\lambda\phi^4$
+    \item[2] 写下路径积分，比如$Z=\int\mathcal{D}\phi e^{i\int\mathcal{L}[\phi]}$
+    \item[3] 对路径积分依照耦合系数进行微扰展开
+    \item[4] 微扰计算路径积分
+    \item[5] 发现存在发散问题
+    \item[6] 正规化来分离发散部分，比如引入截断$\Lambda$，于是$\int_\mathbb{R}\frac{1}{x^2}dx \to \int_{|x|>\frac{1}{\Lambda}\frac{1}{x^2}}dx$
+    \item[7] 令耦合系数为截断的微扰展开式
+    \item[8] 重整化，只考虑路径积分的有限项
+    \item[9] 与实验比较
+    \item[10] 拿Nobel奖，或者从头开始   
+\end{itemize}
+
+
+
+\subsection{分析力学回顾}
+
+\subsubsection{最小作用量原理与Euler-Lagrange方程}
+
+分析力学中，我们用广义坐标$q(t)$与广义速度$\dot{q}=\frac{dq}{dt}$来刻画一个质点系统的运动状态。拉氏量$L(q_i,\dot{q}_i;t)$是关于广义坐标和广义速度的泛函，用来刻画系统的运动规律。
+
+\noindent Note: 函数$f:\mathbb{R}^n\to\mathbb{R}^2$
+
+泛函$L:C(\Omega)\to\mathbb{R}$，其中$C(\Omega)$是$\Omega$上的全体函数
+
+力学体系的作用量定义为
+
+\begin{equation}
+    S=\int_{t_1}^{t_2}L(q_i(t),\dot{q}_i(t);t)dt
+\end{equation}
+
+最小作用量原理(哈密顿原理)：对于真实的一个运动轨迹，当坐标发生一个变分后，作用量不会变小。也就是说$\delta S=0$。
+
+\noindent 注：这里的变分是等时变分，即$\delta t=0$，故拉氏量的变分中没有$\frac{\delta L}{\delta t}\delta t$项。
+
+\begin{equation}
+    \begin{split}
+        0=\delta S &= \delta\int_{t_1}^{t_2} L(q_i,\dot{q}_i;t)dt \\
+            &= \int_{t_1}^{t_2}dt \biggl(\frac{\delta L}{\delta q_i}\delta q_i+\frac{\delta L}{\delta \dot{q}_i}\delta\dot{q}_i\biggr) \\
+            &= \int_{t_1}^{t_2}dt \frac{\delta L}{\delta q_i}\delta q_i + \int_{t_1}^{t_2}(\delta\dot{q}_idt)\frac{\delta L}{\delta \dot{q}_i}\delta\dot{q}_i \\
+            &= \int_{t_1}^{t_2}dt \frac{\delta L}{\delta q_i}\delta q_i + \frac{\delta L}{\delta \dot{q}_i}\delta q_i|_{t_1}^{t_2} - \int_{t_1}^{t_2}dt \frac{d}{dt}\bigl(\frac{\delta L}{\delta \dot{q}_i}\bigr)\delta q_i \\
+            &= \int_{t_1}^{t_2}dt \biggl(\frac{\delta L}{\delta q_i}-\frac{d}{dt}\bigl(\frac{\delta L}{\delta \dot{q}_i}\bigr)\biggr)\delta q_i
+    \end{split}
+\end{equation}
+
+于是我们得到了Euler-Lagrange方程如下
+
+\begin{equation}\label{Euler-Lagrange}
+    \frac{\delta L}{\delta q_i}-\frac{d}{dt}\bigl(\frac{\delta L}{\delta \dot{q}_i} = 0
+\end{equation}
+
+Euler-Lagrange方程是系统的运动方程，比如对于一个谐振子，其拉氏量为$L=\frac{1}{2}m\dot{x}^2-\frac{1}{2}kx^2$，根据Euler-Lagrange方程可以得到，这正是谐振子的运动方程$m\ddot{x}+kx=0$。
+
+考虑Newton第二定律$\vec{F}=m\ddot{\vec{x}}$，对于保守力$\vec{F}$，一般总可以写成势能的梯度$\vec{F}=\nabla V$，于是Newton第二定律可以写成$m\ddot{\vec{x}}-\nabla V$。这与Euler-Lagrange方程具有相同的形式，即如果令$L=\frac{1}{2}m\dot{x}^2-V$，则Euler-Lagrange方程给出的正是Newton第二定律，并且我们顺便得到了在保守力系统中，$L=T-V$。
+
+\subsubsection{哈密顿力学}
+
+定义广义动量
+
+\begin{equation}\label{Legendre}
+    p_i=\frac{\partial L}{\partial \dot{q}_i} 
+\end{equation}
+
+对拉氏量作Legendre变换，定义哈密顿量，它是广义坐标和广义动量的函数
+
+\begin{equation}
+    H(q_i,p_i;t)=p_i\dot{q}_i-L
+\end{equation}
+
+由于L不显含$p_i$，我们计算得到$\frac{\partial H}{\partial p_i}=\dot{q}_i$；以及根据Euler-Lagrange方程(\ref{Euler-Lagrange})，$\frac{\partial H}{\partial q_i}=-\frac{\partial L}{\partial q_i}=-\frac{d}{dt}\frac{\partial L}{\partial \dot{q}_i}=-\frac{d}{dt}q_i=-\dot{q}_i$。于是我们得到了哈密顿正则方程
+
+\begin{equation}\label{Hamilton-eq}
+    \left\{
+        \begin{array}{lr}
+            \dot{p}_i = -\frac{\partial H}{\partial q_i} \\
+            \dot{q}_i = \frac{\partial H}{\partial p_i}
+        \end{array}
+    \right.
+\end{equation}
+
+对于保守力系统，我们已经证明了其拉氏量等于动能减势能，即$L=T-V$。由(\ref{Legendre})，不难得到$H=T+V$。应注意此式仅对保守力学系统成立，对于经典电磁场下带电质点，其哈密顿量为$H=\frac{(\vec{p}+e\hat{A})^2}{2m}+e\phi(x)$，就不再是$T+V$的形式了。
+
+对于一个谐振子，不难计算得到其哈密顿量$H=\frac{p^2}{2m}+\frac{1}{2}kx^2$。利用哈密顿正则方程，不难得到谐振子的运动方程是
+
+\begin{equation}
+    \left\{
+        \begin{array}{lr}
+            \dot{p}_i = -kx \\
+            \dot{q}_i = \frac{p}{m}
+        \end{array}
+    \right.
+\end{equation}
+
+定义泊松括号
+
+\begin{equation}
+    \{A,B\}=\frac{\partial A}{\partial q_i}\frac{\partial B}{\partial p_i}-\frac{\partial B}{\partial q_i}\frac{\partial A}{\partial p_i}
+\end{equation}
+
+这里默认对指标i求和，称为Einstein求和。当然，严格来讲Einstein求和是一上一下两个指标求和，称为缩并，本质上来讲是流形的切空间及其对偶空间的内积，这里的$q_i$和$p_i$并不构成流形的切空间和对偶空间，所以这里不强调上下标。当然，更精细的理论会从辛几何的角度来理解分析力学，此时拉格朗日力学是切丛上的力学，哈密顿力学是余切丛上的力学，Einstein求和也确实是切空间和余切空间的内积。于是可以得到广义坐标和广义动量的对易关系
+
+\begin{equation}
+    \begin{split}
+        \{q_i, p_j\} &= \frac{\partial q_i}{\partial q_k}\frac{\partial p_j}{\partial q_k}-\frac{\partial p_j}{\partial q_k}\frac{\partial q_i}{\partial p_k} \\
+            &= \delta_{ik}\delta_{jk} \\
+            &= \delta_{ij}
+    \end{split}
+\end{equation}
+
+力学量$F=F(q_i,p_i;t)$的演化方程为
+
+\begin{equation}
+    \begin{split}
+        \frac{dF}{dt} &= \frac{\partial F}{\partial q_i}\dot{q}_i+\frac{\partial F}{\partial p_i}\dot{p}_i+\frac{\partial F}{\partial t} \\
+            &= \frac{\partial F}{\partial q_i}\frac{\partial H}{\partial p_i}-\frac{\partial H}{\partial q_i}\frac{\partial F}{\partial p_i}+\frac{\partial F}{\partial t} \\
+            &= \{F,H\}+\frac{\partial F}{\partial t}
+    \end{split}
+\end{equation}
+
+特别地，对于哈密顿量，我们有
+
+\begin{equation}
+    \frac{d H}{dt}=\frac{\partial H}{\partial t}
+\end{equation}
+
+这意味着$\frac{\partial H}{\partial t}=0\Rightarrow\frac{dH}{dt}=0$，也就是说如果哈密顿量不显含时，那么哈密顿量是一个守恒量。
+
+
+
+\subsection{量子力学中的谐振子}
+
+一维谐振子的哈密顿量$\hat{H}=\frac{\hat{p}^2}{2m}+\frac{1}{2}m\omega^2\hat{x}^2=-\frac{\hbar^2}{2m}\nabla^2\frac{1}{2}m\omega^2x^2$。定义产生湮灭算符
+
+\begin{equation}
+    \left\{
+        \begin{array}{lr}
+            \hat{a}=\sqrt{\frac{m\omega}{2\hbar}}(\hat{x}+\frac{i}{m\omega}\hat{p})   \\
+            \hat{a}^\dagger=\sqrt{\frac{m\omega}{2\hbar}}(\hat{x}-\frac{i}{m\omega}\hat{p})
+        \end{array}
+    \right.
+\end{equation}
+
+产生与湮灭算符的基本性质是
+
+\begin{equation}
+    \begin{split}
+        \hat{a}\ket{n}=\sqrt{n}\ket{n-1} \\
+        \hat{a}^\dagger\ket{n}=\sqrt{n+1}\ket{n+1}
+    \end{split}
+\end{equation}
+
+于是可以求出第n能级的态矢量为
+
+\begin{equation}
+    \ket{n}=\frac{(\hat{a}^\dagger)^n}{\sqrt{n!}}\ket{0}
+\end{equation}
+
+定义粒子数算符$\hat{N}=\sum_{i}\hat{a}^\dagger\hat{a}$，于是
+
+\begin{equation}
+    \hat{N}\ket{n}=n\ket{n}
+\end{equation}
+
+\subsubsection{多体耦合谐振子}
+
+N个无耦合谐振子的哈密顿量和态空间(Fock态)为
+
+\begin{equation}
+    \begin{split}
+        \hat{H} = \hat{H}_k = \sum\frac{\hat{p}^2_k}{2m_k}+\frac{1}{2}m_k\omega_k\hat{x}_k^2 = \sum(\hat{a}^\dagger\hat{a}+\frac{1}{2})\hbar\omega_k \\
+        \ket{n_1n_2...n_k...n_N}=(\hat{a}_1^\dagger)^{n_1}(\hat{a}_2^\dagger)^{n_2}...(\hat{a}_N^\dagger)^{n_N}
+    \end{split}
+\end{equation}
+
+耦合谐振子的哈密顿量
